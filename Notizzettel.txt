@@ -1,0 +1,118 @@
+// =========================================
+
+Seminar Updates Modern C++ 
+
+Peter Loos
+
+== Development
+== Schulungen
+
+C/C++, Java, C#, Mobile Progr. (Android (Java)), Kotlin , (( Python ))
+
+Back-to-the-Roots:
+
+Guten Morgen
+
+// =========================================
+
+12.30 - 13.30
+
+
+// =========================================
+
+Online:
+
+2 Tools:
+
+a) Visual Studio IDE
+
+   Samples standardisiert
+
+b) https://github.com/pelocpp
+
+   https://github.com/pelocpp/cpp_modern
+
+Was machen wir ?
+Was sind meine Erwartungen ???
+
+Agenda:
+
+Was ist wichtig 
+Was MUSS DRIN sein
+Was ist nicht so wichtig
+
+C++ 17 
+
+Modern C++
+
+Classic C++
+
+// ============================================================
+
+;..; .... CA0    temp. Objekt   // wird freigegeben
+;..; .... 330    Objekt für den Stack
+
+Lösung:
+
+Move-Semantik
+
+;..; .... C30    Objekt für den Stack
+
+===========================================================
+
+Lambdas:
+
+Herleitung.
+
+Aufrufbares Objekt // Callable Object
+
+Was ist ein aufrufbares Objekt ???
+
+Def:
+
+class SomeClass 
+
+SomeClass obj;
+
+auto result = obj.method(1, 2, 3);
+
+auto result = obj(1, 2, 3);   // operator()
+
+auto result = obj[5];  // operator[]
+
+Keep it simple:
+
+Was tut / ist der Operator():
+
+Eigentlich eine gewöhnliche Methode, nur dass diese keinen Namen hat.
+
+Iteratoren:
+
+auto iter;
+
+++iter;                 operator++
+
+*iter;                  operator*
+
+if (iter1 == iter2)     operator==
+
+STL-Container:          begin(), end()
+
+// =============================================
+
+Lambdas:
+
+Was ist ein Lambda: Eine Instanz einer Callable Klasse:
+
+                    Eine Instanz einer 
+                    Klasse, die den Operator() überladen tut.
+
+
+Lambdas:   Was ist ein Lambda: Eine Funktion . NEIN !!!!!!!!!!!!!!!!!!!!!!!!
+
+Lambdas:   Können auf Variablen der Umgebung zugreifen !!!!
+
+// =============================================
+
+Tool:  Cpp Insights.
+
