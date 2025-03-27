@@ -116,3 +116,94 @@ Lambdas:   Können auf Variablen der Umgebung zugreifen !!!!
 
 Tool:  Cpp Insights.
 
+Valgrind:
+
+// =============================================
+
+Konstanten // Literal
+
+UDL:  User Defined Literal   
+
+Lesbarkeit des Quellcode
+Typsicherheit
+
+==> Strong Type:
+
+100l
+
+100ll
+
+123.45f
+
+100_km
+
+100_kg
+
+0xFF0000_farbe  unsigned int => class Color
+
+0xFF0000_rgb
+
+// Bemerkung:
+
+C++:  Lexikon:   anton, while , 123, 123.456, ! , &&, &, ; 
+
+Das Lexikon von C++ ist erweiterbar:  0xFF0000_rgb
+
+How:  operator""   Literal-Operator
+
+// ===========================================
+
+Copy-Move Elision
+
+RVO:  Return Value Optimization
+
+NRVO: Named Return Value Optimization
+
+// ===========================================
+
+Was ist das Problem eines Shared-Ptr Objekts ???
+
+Er funktioniert nicht immer ?!?!?!?!?! No delete !!!
+
+a) std::weak_ptr
+
+b) Was ist das eigentliche Problem ???
+
+Antwort:  Zyklische Referenzen:  A => B   und B => A
+
+Observer - Pattern
+
+a) Subject:  Hat Zustand, der sich ändert // dieser will beobachtet werden.
+
+b) Observer: Kennen das Subject // beobachte.
+
+c) Subject:  Zustand HAT sich geändert // kennt seine Beobachter // informiert diese
+
+d)  Subject: Hat Methoden attach / detach für Observer,
+    hat intern eine Liste für alle Observer
+
+MAIN:
+
+Subject: std::shared_ptr
+
+Observer: std::shared_ptr
+
+Liste für alle Observer: Hmmmmmmmmmmmmmmmmm, welchen Datentyp haben die Listenelemente
+
+STRENGE KOPPLUNG
+
+i) std::shared_ptr: Entscheidet Subject über die Lebensdauer von Observer-Objekten. NO
+
+LOSE KOPPLUNG:
+
+ii) std::weak_ptr: Subject entscheidet NICHT über die Lebensdauer von Observer-Objekten.
+
+Subject möchte informieren // lock // nullptr: 
+
+Hmm, Liste wird immer größer mit std::weak_ptr-Leichen
+
+========
+
+Best Practice:  std::shared_ptr oder std::weak_ptr.
+
+Im Nachgang: Ginge ein std::weak_ptr: 

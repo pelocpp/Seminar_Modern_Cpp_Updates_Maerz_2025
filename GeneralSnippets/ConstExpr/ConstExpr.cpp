@@ -33,11 +33,14 @@ namespace ConstExprComplex {
     static void testComplex()
     {
         constexpr Complex c0{ };
+
         constexpr Complex c1{ 1.0, 2.0 };
         constexpr Complex c2{ 3.0, 3.0 };
 
         constexpr float r1 = c1.real();
+
         constexpr Complex c3 = c1 + c2;
+
         constexpr float r2 = c3.real();
 
         // verify 'constness' with the help of disassembly and
@@ -66,7 +69,7 @@ namespace ConstExprDynamicData {
 
     static void testDynamicData()
     {
-        constexpr int sum = naiveSum(10);
+        constexpr int sum = naiveSum(5);
         std::println("Sum from 1 up to 10: {}", sum);
     }
 }
@@ -138,7 +141,7 @@ namespace ConstExprPow {
     }
 }
 
-void main_constexpr()
+void main_constexpr() 
 {
     ConstExprComplex::testComplex();
     ConstExprDynamicData::testDynamicData();

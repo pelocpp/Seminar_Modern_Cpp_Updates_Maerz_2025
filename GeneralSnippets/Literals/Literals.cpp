@@ -44,6 +44,11 @@ namespace Literals_Color_Runtime {
     public:
         Color() : m_r{}, m_g{}, m_b{} {}
 
+        Color(int rgb) {
+        
+            // Umrechnung von 'rgb' auf m_r, m_g und m_b
+        }
+
         Color(uint8_t r, uint8_t g, uint8_t b)
             : m_r{ r }, m_g{ g }, m_b{ b } {}
     };
@@ -59,7 +64,7 @@ namespace Literals_Color_Runtime {
     }
 
     // literal operator ("cooked" version)
-    static Color operator"" _rgb(unsigned long long int value) {
+    static Color operator"" _rgb (unsigned long long int value) {
 
         if (value > 0xFFFFFF) {
             throw std::runtime_error("literal too large");
@@ -96,7 +101,11 @@ namespace Literals_Color_Runtime {
 
     static void test_02() {
 
-        Color red{ 0xFF0000_rgb };
+    //    int n = 111111111111111111111111111111111111111111111111111111111;
+
+        Color nored = 0x1FFFFFFFF_rgb;  // ARGB  Too Large ???
+
+        Color red = 0xFFAABB_rgb;
         std::cout << red << std::endl;
 
         Color magenta{ 0xFF00FF_rgb };
@@ -108,8 +117,8 @@ namespace Literals_Color_Runtime {
         Color unknown{ 12345_rgb };
         std::cout << unknown << std::endl;
 
-        unknown = "0x012345"_rgb;
-        std::cout << unknown << std::endl;
+        Color test = "0x012345"_rgb;
+        std::cout << test << std::endl;
     }
 
     static void test_02_with_errors()
@@ -258,15 +267,17 @@ namespace Literals_Color_CompileTime {
     // throws errors at compile time
     static void test_03_with_errors() {
 
+        //int n = 1111111111111111111111111111111111111111111;
+
         // value outside rgb range
-        // constexpr Color col1{ 0x1FFFFFF_rgb };
+        //constexpr Color col1{ 0x1FFFFFF_rgb };
 
         // illegal hexadecimal digit
         // constexpr Color col2{ "0x00GG00"_rgb };
     }
 }
 
-void main_literals()
+void main_literals() 
 {
     using namespace Literals_With_Separators;
     test_01();

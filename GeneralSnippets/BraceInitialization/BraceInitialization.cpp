@@ -13,8 +13,9 @@ namespace BraceInitialization {
         double dval{ 123.456 };
         int ival{ 123 };
 
-        double d1 = ival;      // Compiles
-        // double d2{ ival };  // Error: "conversion from 'int' to 'double' requires a narrowing conversion"
+        float d0 = 123;      // Compiles
+        float d1 = ival;     // Compiles
+       // float d2{ ival };  // Error: "conversion from 'int' to 'double' requires a narrowing conversion"
     }
 
     // =================================================================================
@@ -22,8 +23,10 @@ namespace BraceInitialization {
 
     static void test_01()
     {
+        int z = 0;
+
         int n{};                   // n equals 0
-        float f{};                 // f equals 0.0
+        float f{};                 // f equals 0.0f
         double d{};                // d equals 0.0
         unsigned long l{};         // l equals 0
         size_t i{};                // i equals 0
@@ -41,6 +44,8 @@ namespace BraceInitialization {
 
     static void test_02()
     {
+        int z = 1;
+
         int n{ 1 };                // n equals 1
         float f{ 2.5f };           // f equals 2.5
         double d{ 3.5 };           // d equals 3.5
@@ -66,9 +71,9 @@ namespace BraceInitialization {
     static void test_03()
     {
         [[ maybe_unused]]
-        struct Struct obj0;                           // uninitialized !!!
+        struct Struct obj0;                                 // uninitialized !!!
 
-        struct Struct obj1 {};                        // obj1.m_i => 0, obj1.m_j => 0
+        struct Struct obj1 {};                              // obj1.m_i => 0, obj1.m_j => 0
 
         struct Struct obj2 { 1, 2 };                  // obj2.m_i => 1, obj2.m_j => 2
 
@@ -104,7 +109,9 @@ namespace BraceInitialization {
         int m_b;
 
     public:
-        Class(int a, int b) : m_a{ a }, m_b{ b } {}
+        Class(int a, int b) 
+            : m_a{ a }, m_b{ b }
+        {}
     };
 
     static void test_05()
@@ -146,14 +153,14 @@ namespace BraceInitialization {
 
         std::map<std::string, int> myMap
         {
-            { "Hans", 1958 },
+            { "Hans", 1958 },   //   std::pair
             { "Sepp", 1956 } 
         };
 
         std::for_each(
             myVector.begin(),
             myVector.end(),
-            [](int value) {
+            [](const int& value) {
                 std::print("{}, ", value);
             }
         );
@@ -217,13 +224,17 @@ namespace BraceInitialization {
 
         int intArray6[10]{ 0 };
 
-        int intArray7[10]{ };
+        int intArray7[10]{ };   // go for this statement
+
+        for (int i = 0; i < 10; ++i) {
+            intArray7[i] = 0;
+        }
     }
 
     // =================================================================================
     // Nested Structures / *Brace Elision*
 
-        // POD - C-kompatibel
+    // POD - C-kompatibel
     struct Point
     {
         int x;
@@ -239,10 +250,18 @@ namespace BraceInitialization {
 
     static void test_10()
     {
-        Rectangle r1{ {1, 2}, {3, 4} };
+        Rectangle r1
+        { 
+            { 1, 2 },
+            { 3, 4 } 
+        };
+
+
         Rectangle r2{ {}, {} };
         Rectangle r3{ };
+
         Rectangle r4{ 1, 2, 3, 4 };
+        
         Rectangle r5{ 1, 2 };
     }
 
