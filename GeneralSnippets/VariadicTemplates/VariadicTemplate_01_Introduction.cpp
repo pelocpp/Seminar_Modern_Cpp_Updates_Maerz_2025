@@ -78,8 +78,6 @@ namespace VariadicTemplatesIntro_Seminar {
         return tmp;
     }
 
-
-
     void test_variadic() {
 
         std::unique_ptr<Unknown> up = std::make_unique<Unknown>(11, 12, 13);

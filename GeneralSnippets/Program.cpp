@@ -48,7 +48,7 @@ int main()
         //main_expression_templates();
         //main_exception_safety();
         //main_explicit_keyword();
-        //main_folding();
+        main_folding();
         //main_functional_programming_ranges();
         //main_functional_programming();
         //main_functional_programming_alternate();
@@ -98,7 +98,7 @@ int main()
         //main_type_erasure();
         //main_type_traits();
         //main_unique_ptr();
-        main_variadic_templates_introduction();
+       // main_variadic_templates_introduction();
         //main_variadic_templates_working_on_every_argument();
         //main_variadic_templates_sum_of_sums();
         //main_variadic_templates_mixins();

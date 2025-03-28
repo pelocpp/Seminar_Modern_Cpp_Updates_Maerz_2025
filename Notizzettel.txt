@@ -4,6 +4,9 @@ Seminar Updates Modern C++
 
 Peter Loos
 
+peter.loos@gmx.de
+-----------------
+
 == Development
 == Schulungen
 
@@ -266,3 +269,37 @@ b) std::thread
 
 c) emplace-Technik
 
+============================================================
+
+std::initializer_list<int>    Daten: STACK
+
+   ====>
+
+vs.
+
+std::vector<int>   Daten: HEAP  // Performanz !!!
+
+   ====>
+
+
+std::initializer_list<int> ist KEIN STL-Container:
+
+Lightweight-Container:
+
+begin();
+end();
+size();
+
+// =============================================
+
+std::vector<int> vec { 10 };   // Size: 1 -  Wert 10
+std::vector<int> vec (10);     // Size: 10 - Wert 0
+
+
+std::vector<int> vec { 10, 20 };   // Size: 2 -  Werte 10 und 20
+std::vector<int> vec ( 10, 20 );   // Size: 10 - Werte 20
+
+// =============================================
+
+Elapsed time:    796.513 microseconds.
+Elapsed time: 13.669.392 microseconds.

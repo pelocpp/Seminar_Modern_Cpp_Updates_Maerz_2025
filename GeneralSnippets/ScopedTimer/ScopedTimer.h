@@ -18,7 +18,8 @@ public:
     }
 
     ~ScopedTimer() {
-        stopWatchMilli(std::cout);
+        //stopWatchMilli(std::cout);
+        stopWatchMicro(std::cout);
     }
 
     // no copying or moving

@@ -8,6 +8,82 @@ module;
 
 module modern_cpp:folding;
 
+namespace Folding_Seminar {
+
+    // generische Funktionen
+
+    template < typename T>
+    concept OnlyIntegers = std::is_same<int,T>::value;
+
+    //template < typename T>
+    //    requires OnlyIntegers < T>
+    //auto add(T a, T b)
+    //{
+    //    return a + b;
+    //}
+
+    auto add(OnlyIntegers auto a, OnlyIntegers auto b)
+    {
+        return a + b;
+    }
+
+    void test_concepts()
+    {
+        double result = add(5, 6);
+    }
+
+    // Beispiel: Will nur int's addieren
+    template <typename ... TArgs>
+        requires (... && OnlyIntegers<TArgs>)
+    auto addierer_templated(TArgs ... args) {
+
+        auto result = (... + args);
+        return result;
+    }
+
+    auto addierer(auto ... args) {
+
+        // 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10
+
+        auto result = ( ... + args ) ;
+
+        return result;
+    }
+
+    auto addierer_classic(auto ... args) {
+
+        auto elements = { args ... };
+        auto result = 0;
+
+        for ( auto  n : elements) {
+            result += n;
+        }
+
+        return result;
+    }
+
+    void printer(auto ... args) {
+
+        // std::cout << args1 << args2 << args3 << .............
+
+        (std::cout << ... << args);
+    }
+
+    void test_seminar() {
+
+        auto result1 = addierer_templated(1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+        //auto result1 = addierer(1, 2, 3, 4, 5, 6, 7, 8, 9 );
+        //auto result2 = addierer_classic(1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+        // printer("ABC ", 123.456, " DEF");
+    }
+
+}
+
+
+
+
 namespace Folding {
 
     /* folding examples: introduction
@@ -154,7 +230,7 @@ namespace Folding {
 
     static void test_06_benchmark_folding() {
 
-        ScopedTimer watch{ };
+        ScopedTimer watch{ };   // RAII
 
         for (size_t i{}; i != MaxIterations; ++i) {
             auto sum{ addFolding(1, 2, 3, 4, 5, 6, 7, 8, 9, 10) };
@@ -173,17 +249,22 @@ namespace Folding {
 
 void main_folding()
 {
+    using namespace Folding_Seminar;
+    test_concepts();
+    test_seminar();
+    return;
+
     using namespace Folding;
-    test_01();
-    test_02();
-    test_03a();
-    test_03b();
-    test_03c();
-    test_03d();
-    test_04();
-    test_05();
-    test_06_benchmark_folding();
-    test_06_benchmark_iterating();
+    //test_01();
+    //test_02();
+    //test_03a();
+    //test_03b();
+    //test_03c();
+    //test_03d();
+    //test_04();
+    //test_05();
+    //test_06_benchmark_folding();
+    //test_06_benchmark_iterating();
 }
 
 // =====================================================================================
