@@ -28,12 +28,14 @@ namespace GenericFunctions {
     // ---------------------------------------------------------------------------------
     // generic function - how the compiler sees them
 
+    // primary template
     template<typename T>
     static void Function(T x, int y)
     {
         std::cout << "x=" << x << ", y=" << y << std::endl;
     }
 
+    // template specialization
     template<>
     void Function<int>(int x, int y)
     {
@@ -203,10 +205,17 @@ namespace GenericLambdas {
 
 namespace GenericLambdasExample {
 
+    // define a generic lambda
+    auto isGreaterThanFifty = [](const auto& n) {
+        return n > 50;
+    };
+
     static void test_01()
     {
-        // define a generic lambda
-        auto isGreaterThanFifty = [](const auto& n) { return n > 50; };
+        //// define a generic lambda
+        //auto isGreaterThanFifty = [](const auto& n) {
+        //    return n > 50;
+        //};
 
         std::vector<int> intValues{ 44, 65, 22, 77, 2 };
 

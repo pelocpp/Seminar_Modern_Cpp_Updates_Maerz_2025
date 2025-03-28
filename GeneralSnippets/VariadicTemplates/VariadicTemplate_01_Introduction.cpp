@@ -4,6 +4,93 @@
 
 module modern_cpp:variadic_templates;
 
+namespace VariadicTemplatesIntro_Seminar {
+
+    template <typename T>
+    void printer(T n) {
+        std::cout << n << std::endl;
+    }
+
+    template <typename T, typename ... U>  // einpacken
+    void printer(T n, U ... m) {           // einpacken
+        std::cout << n << std::endl;
+        printer(m ...);                    // auspacken
+    }
+
+    void test_variadic_erstes_beispiel() {
+
+        printer(1, 2, 3, 4, 5);   // template argument deduction
+    }
+
+    // ========================================
+    // Why
+
+    class Unknown {
+    private:
+        int m_var1;
+        int m_var2;
+        int m_var3;
+
+    public:
+        Unknown() : m_var1{ -1 }, m_var2{ -1 }, m_var3{ -1 } {
+            std::cout << "c'tor()" << std::endl;
+        }
+
+        Unknown(int n) : m_var1{ n }, m_var2{ -1 }, m_var3{ -1 } {
+            std::cout << "c'tor(int)" << std::endl;
+        }
+
+        Unknown(int n, int m) : m_var1{ n }, m_var2{ m }, m_var3{ -1 } {
+            std::cout << "c'tor(int, int)" << std::endl;
+        }
+
+        Unknown(int n, int m, int k) : m_var1{ n }, m_var2{ m }, m_var3{ k } {
+            std::cout << "c'tor(int, int, int)" << std::endl;
+        }
+
+        friend std::ostream& operator<< (std::ostream&, const Unknown&);
+    };
+
+    std::ostream& operator<< (std::ostream& os, const Unknown& obj) {
+        os
+            << "var1: " << obj.m_var1
+            << ", var2: " << obj.m_var2
+            << ", var3: " << obj.m_var3;
+
+        return os;
+    }
+
+    template <typename T, typename ... TArgs>
+    std::unique_ptr<T> my_make_unique(TArgs ... args) {  // ist okay
+
+        std::unique_ptr<T> tmp(new T{ args ... });
+        return tmp;
+    }
+
+
+    // a) Ad-hoc Lösung: const TArgs& ... args
+
+    // b) Perfekte Lösung: Universal Referenz & std::forward<T>
+    template <typename T, typename ... TArgs>
+    std::unique_ptr<T> my_make_unique_perfect(TArgs&& ... args) {  // ist okay
+
+        std::unique_ptr<T> tmp(new T{ std::forward<TArgs> (args) ... });
+        return tmp;
+    }
+
+
+
+    void test_variadic() {
+
+        std::unique_ptr<Unknown> up = std::make_unique<Unknown>(11, 12, 13);
+
+        int x = 13;
+
+        std::unique_ptr<Unknown> myup = 
+            my_make_unique_perfect<Unknown>(11, 12, x);
+    }
+}
+
 namespace VariadicTemplatesIntro_01 {
 
     // ====================================================================
@@ -352,6 +439,9 @@ namespace VariadicTemplatesIntro_06 {
 
 void main_variadic_templates_introduction()
 {
+    VariadicTemplatesIntro_Seminar::test_variadic();
+    return;
+
     VariadicTemplatesIntro_01::test_printer_01();
 
     VariadicTemplatesIntro_02::test_my_make_unique();

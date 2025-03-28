@@ -30,16 +30,21 @@ namespace StructuredBinding {
     {
         auto [quotient, remainder] { divide_remainder(20, 3) };
 
-        std::println("16 / 3 is {} with a remainder of {}", quotient, remainder);
+        std::println("16 / 3 is {} with a remainder of {}",
+            quotient, remainder);
     }
 
     static void test_03()
     {
-        int arr[] { 123, 456, 789 };
+        int arr[3] { 123, 456, 789 };
 
-        auto [a, b, c] { arr };
+        const auto& [a, b, c] { arr };
 
         std::println("{}, {}, {}", a, b, c);
+
+        // a = 999;
+
+        std::println("{}, {}, {}", arr[0], b, c);
     }
 
     static void test_04()
@@ -79,7 +84,18 @@ namespace StructuredBinding {
         int m_y;
     };
 
+    using MyPoint = std::pair<int, int>;
+
+    template <typename T>
+    using MyPoint2 = std::pair<T, T>;
+
     static void test_07() {
+
+        std::vector numbers{ 0, 1, 2 };
+
+        std::pair punkt3{ 0, 0 };
+
+        MyPoint2<int> punkt{ 0, 0 };  // CTAD: Class Template Argument Deduction
 
         // without structured binding
         Point p1 { 1, 2 };
@@ -89,7 +105,7 @@ namespace StructuredBinding {
 
         // with structured binding
         Point p2 { 10, 20 };
-        auto [x, y] { p2 };
+        auto [x, y] = p2 ;
 
         std::println("X Coordinate : {}", x);
         std::println("Y Coordinate : {}", y);

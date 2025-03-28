@@ -175,7 +175,9 @@ namespace MoveSemantics {
 
         std::vector<BigData> vec;
 
-        vec.push_back(BigData(10, 1));
+        vec.emplace_back(10, 1);           // int, int
+
+        // vec.push_back(BigData(10, 1));  // BigData
     }
 
     static void test_03_demonstrate_move_assignment() {

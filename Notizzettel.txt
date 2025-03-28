@@ -207,3 +207,62 @@ Hmm, Liste wird immer größer mit std::weak_ptr-Leichen
 Best Practice:  std::shared_ptr oder std::weak_ptr.
 
 Im Nachgang: Ginge ein std::weak_ptr: 
+
+========================================================
+
+Ein Tupel ist ähnlich zu einer Struktur - für Schreibfaule.
+
+Hmmm, mit Structured Binding (also mit Namen) bin ich eng an einer Struktur dran.
+
+
+========================================================
+
+std::variant:
+
+Kann Variablen unterschiedlichen Typs aufnehmen,
+zu einem Zeitpunkt aber nur eine!
+
+Beispiel:
+
+Excel  ==> Zelle / Cell:
+
+Cell:  Zeichenkette, Wert, Datum, Währung (Currency), ...
+
+Game Programming:
+
+Game Board ==> Figure: 
+
+Gleicht einem union:  float-Wert ==> byte array[4]
+
+=============================================================
+
+Beobachtung:
+
+            if (std::is_same<ElemTypeWithoutRefAndConst, int>::value == true) {
+00007FF7C729D176  xor         eax,eax               // EAX: Akku  : Schreibt NULL rein.
+
+00007FF7C729D178  cmp         eax,1                 // DER COMPILER WEISS, dass da ne 1 drin steht
+
+00007FF7C729D17B  je          `VariantDemo::test_03'::`2'::<lambda_1>::operator()<int>+7Ah (07FF7C729D1CAh)  
+
+// =======================================================
+
+Variadic Templates:  Hinter den Kulissen
+
+a) Debugger
+
+b)  Cpp  Insights
+
+Why ???????????????????????????????????????
+
+Transport unterschiedlichster Daten von A nach B
+
+a) std::make_unique
+   std::make_shared
+
+b) std::thread 
+
+   std::thread t { tproc, 1, 2, 3 };
+
+c) emplace-Technik
+
