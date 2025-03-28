@@ -7,6 +7,11 @@ Peter Loos
 peter.loos@gmx.de
 -----------------
 
+https://github.com/pelocpp
+
+https://github.com/pelocpp/cpp_modern
+
+
 == Development
 == Schulungen
 
