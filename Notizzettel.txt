@@ -303,3 +303,114 @@ std::vector<int> vec ( 10, 20 );   // Size: 10 - Werte 20
 
 Elapsed time:    796.513 microseconds.
 Elapsed time: 13.669.392 microseconds.
+
+=============================================================
+
+Array:
+
+Wenn Größe bekannt:  Go-for Array :: Performanz
+
+==============================================================
+
+
+const char* s = "111111111111111111111111111111111111111111111111111111";
+
+Wo liegt "111111111111111111111111111111111111111111111111111111" im Programm:
+
+a) NICHT AM Heap
+b) Globales Datensegment:  .bss, .data, .text
+
+--------------------------------------------------------
+
+std::string s = "111111111111111111111111111111111111111111111111111111";
+
+Wo liegt "11111111111111111111111111111111" bzgl. Objekt s?
+
+Am Heap !!!
+
+--------------------------------------------------------
+
+Beispiel: "Local Windows Debugger"  Muss das am Heap liegen ????
+
+Muss das in einem std::string Objekt sein  ???
+
+Ab C++ 17: Alternative:   std::string_view
+
+Wie std::span:  Anfangsadresse & Länge.
+
+std::string_view sv =  "11111111111111111111111111111111";
+
+Elementare Operationen:  find
+
+========================================================
+
+Habe 2 kleine Funktionen:
+
+Welche ist schneller ??????????
+
+== StopWatch
+== Google Test
+== WebSite: BenchMark
+
+https://quick-bench.com/
+
+https://github.com/pelocpp/cpp_clean_performant_secure_code/blob/master/Clean_Performant_Code/Benchmarking/Readme_Benchmarking.md
+
+
+// prefix version using std::string
+static std::string prefix(const std::string& str) {
+    if (str.length() >= 5) {
+        // extract a part of string
+        auto substr = str.substr(1, 4);  // substr is a std::string
+        return substr;
+    }
+    return {};
+}
+
+// prefix version using std::string_view
+static std::string_view prefix(std::string_view str) {
+    if (str.length() >= 5) {
+        // extract a part of string
+        auto substr = str.substr(1, 4);  // substr is a std::string_view
+        return substr;
+    }
+    return {};
+}
+
+// Note: take care of SSO
+constexpr auto StringArgument1 = "1234567890";
+constexpr auto StringArgument2 = "The quick brown fox jumps over the lazy dog";
+constexpr auto StringArgument = StringArgument1;
+
+static void StdStringPrefix(benchmark::State& state) {
+
+    for (auto _ : state) {
+
+        std::string s{ StringArgument };
+        auto result{ prefix(s) };
+
+        benchmark::DoNotOptimize(result);
+    }
+}
+
+BENCHMARK(StdStringPrefix); // register StdStringPrefix as a benchmark
+
+static void StdStringViewPrefix(benchmark::State& state) {
+
+    for (auto _ : state) {
+
+        std::string_view s{ StringArgument };
+        auto result{ prefix(s) };
+
+        benchmark::DoNotOptimize(result);
+    }
+}
+
+BENCHMARK(StdStringViewPrefix); // register StdStringViewPrefix as a benchmark
+
+// ========================================================
+
+Neues Projekt: Übersetzungszeiten verbessern:
+
+Modules in C++:  Precompiled-Headers.
+

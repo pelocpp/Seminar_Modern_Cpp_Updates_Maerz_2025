@@ -2,12 +2,34 @@
 // Array.cpp // std::array // std::to_array // std::span
 // =====================================================================================
 
+module;
+
+#include <span>
+
 module modern_cpp:class_array;
 
 namespace StdArray {
 
     // -------------------------------------------------------------------
     // initialization
+
+    static void  test_00_vector()
+    {
+        std::vector<int> numbers;
+
+        numbers.reserve(80);
+
+        for (int i = 0; i < 100; ++i) {
+
+            numbers.push_back(2 * i);
+
+      //      std::println("i: {} - size: {} - capacity: {} - data{}", i, numbers.size(), numbers.capacity(), numbers.data());
+
+            std::cout << "i: " << i << " - size: " << numbers.size() << "- capacity: " << numbers.capacity() << " - data" << numbers.data() << std::endl;
+        }
+    }
+
+    std::array<int, 5> global_array1;
 
     static void test_01() {
 
@@ -52,7 +74,7 @@ namespace StdArray {
         std::println("{}", array[3]);
 
         // undefined behaviour
-        //std::println("{}", array[5]);
+      //  std::println("{}", array[5]);
 
         // valid index
         array.at(2) = 33;
@@ -359,23 +381,23 @@ namespace StdArray {
 
     static void test_31() {
 
-        //int carr[]{ 1, 2, 3, 4, 5 };
-        //printArray(carr);
-
-        //std::array arr{ 6, 7, 8, 9, 10 };
-        //printArray(arr);
-
-        //std::vector<int> vec{ 1, 3, 5, 7, 9 };
-        //printArray(vec);
-
         int carr[]{ 1, 2, 3, 4, 5 };
-        printArray(std::span{ carr });
+        printArray(carr);
 
         std::array arr{ 6, 7, 8, 9, 10 };
-        printArray(std::span{ arr });
+        printArray(arr);
 
-        std::vector vec{ 1, 3, 5, 7, 9 };
-        printArray(std::span{ vec });
+        std::vector<int> vec{ 1, 3, 5, 7, 9 };
+        printArray(vec);
+
+        //int carr[]{ 1, 2, 3, 4, 5 };
+        //printArray(std::span{ carr });
+
+        //std::array arr{ 6, 7, 8, 9, 10 };
+        //printArray(std::span{ arr });
+
+        //std::vector vec{ 1, 3, 5, 7, 9 };
+        //printArray(std::span{ vec });
     }
 
     // --------------------------------------------------------------------
@@ -408,6 +430,8 @@ namespace StdArray {
 void main_array()
 {
     using namespace StdArray;
+
+    test_00_vector();
 
     test_01();
     test_02();
